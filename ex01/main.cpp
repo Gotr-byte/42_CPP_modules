@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:07 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/11 20:43:49 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/02/12 14:31:36 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@
 int main(){
 
 	Contact instance[8];
-	Contact instance2;
 	PhoneBook Company;
-	PhoneBook recieveCompany;
 	std::string name;
 	std::string yourName;
+	std::string chooseFunction;
+	std::string promptInput;
+	std::string prompt = "phoneBook>";
+	std::string instructions = "enter 1 for ADD";
 	int			index;
 	int			oldest;
 
 	oldest = 0;
 	while (TRUE)
 	{
+		std::cout << prompt;
 		if (oldest > 8)
 			oldest = 0;
 		index = oldest;
@@ -42,6 +45,7 @@ int main(){
 			instance[index].SetName(name);
 			yourName = instance[index].GetName();
 			std::cout << "Hello " << yourName << std::endl;
+			std::cout << "Index: " << index << std::endl;
 			Company.SetContact(instance[index], index);
 			std::cout << Company.GetContact(index).GetName() << " hired" << std::endl;
 			index++;
