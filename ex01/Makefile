@@ -1,7 +1,7 @@
 NAME := contacts
 SRCFILES := ./main.cpp \
-			./Contact.class.cpp \
-			# ./PhoneBook.class.cpp 
+			./Contact.cpp \
+			./PhoneBook.cpp 
 
 CPP = c++ -std=c++98
 CPPFLAGS = -Wextra -Werror -Wall
