@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:21:51 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/11 19:47:15 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:41:33 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,16 @@ void Contact::SetName( std::string name ){
 			Contact::firstName = name;
 }
 
+void Contact::SetLastName ( std::string inputLastName){
+			Contact::lastName = inputLastName;
+}
+
 std::string Contact::GetName(void)
 {
 	return(Contact::firstName);
+}
+
+std::string Contact::GetLastName(void)
+{
+	return(Contact::lastName);
 }

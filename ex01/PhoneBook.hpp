@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:12:04 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/11 20:43:25 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:30:30 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,7 @@ class PhoneBook {
 	public:
 		PhoneBook( void );
 		~PhoneBook( void );
-		void SetContact( Contact contactData, int index );
-		Contact GetContact( int index );
-		// void Add( Contact contactData, int index);
+		void SetContact( Contact &contactData, int index );
+		Contact &GetContact( int index );
 };
 #endif
-
-// class classA
-// {
-// public:
-// classA();
-
-// int intArray[20];
-// vector<classB> arrayOfClassB;
-// };
-
-// classA::classA() : arrayOfClassB(20, classB("")) { }
