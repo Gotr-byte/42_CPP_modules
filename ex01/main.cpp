@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:07 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/13 19:52:51 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:45:39 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,40 @@
 #define TRUE 1
 #define SAME 0
 
-int add(Contact &inputContact, PhoneBook &company, int oldest)
+int add(Contact &inputContact, PhoneBook &company, int index)
 {
 	std::string inputFirstName;
 	std::string inputLastName;
 
-	if (oldest > 7)
-		oldest = 0;
-	int index = oldest;
-	if (index < 8)
+	if (index > 7)
 	{
-		std::cout << "Please enter first name: ";
-		std::cin >> inputFirstName;	
-		inputContact.SetName(inputFirstName);
-		std::cout << "Please enter last name: ";
-		std::cin >> inputLastName;	
-		inputContact.SetLastName(inputLastName);
-		company.SetContact(inputContact, index);
-		index++;
+		index = 0;
 	}
-	oldest++;
-	return(oldest);
+	std::cout << "Please enter first name: ";
+	std::cin >> inputFirstName;	
+	inputContact.SetName(inputFirstName);
+	std::cout << "Please enter last name: ";
+	std::cin >> inputLastName;	
+	inputContact.SetLastName(inputLastName);
+	company.SetContact(inputContact, index);
+	index++;
+	return(index);
 }
 
-void search (PhoneBook &company){
-	int index;
-	index = 0;
-	while (index < 8)
+void search (PhoneBook &company, int index){
+	int localIndex = 0;
+	while (localIndex < index)
 	{
-		std::cout << "First name: "<< company.GetContact(index).GetName() << std::endl;
-		std::cout << "Last name: " << company.GetContact(index).GetLastName() << std::endl;
-		index++;
+		std::string firstNameToPrint;
+		if (company.GetContact(localIndex).GetName().length() > 10)
+			firstNameToPrint = company.GetContact(localIndex).GetName().substr(0, 9).append(".");
+		else
+			firstNameToPrint = company.GetContact(localIndex).GetName().substr(0, 10);
+		std::string lastNameToPrint = company.GetContact(localIndex).GetLastName();
+
+		std::cout << firstNameToPrint << " | " << lastNameToPrint.substr(0,10) << std::endl;
+		localIndex++;
 	}
-	index = 0;
 }
 
 int main(){
@@ -71,19 +72,13 @@ int main(){
 		std::cout << prompt;
 		std::cin >> readInput;
 		if (readInput.compare(addCmd) == SAME){
-			oldest = add(inputContact, company, oldest);
+			index = add(inputContact, company, index);
 		}
 		else if (readInput.compare(exitCmd) == SAME){
 			return 0;
 		}
 		else if (readInput.compare(searchCmd) == SAME){
-			// while (index < 8)
-			// {
-			search (company);
-				// std::cout << company.GetContact(index).GetName() << std::endl;
-			// 	index++;
-			// }
-			// index = 0;
+			search (company, index);
 		}
 		else{
 			std::cout << "Invalid command" << std::endl;

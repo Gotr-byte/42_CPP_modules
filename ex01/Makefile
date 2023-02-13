@@ -8,15 +8,12 @@ CPPFLAGS = -Wextra -Werror -Wall
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME):
 	$(CPP) $(CPPCFLAGS) $(SRCFILES) -o $(NAME) 
 
 clean:
 	rm $(NAME);
 
-fclean:
-	rm $(NAME);
-
-re:		fclean all
+re:		clean all
 
 .PHONY: clean fclean re

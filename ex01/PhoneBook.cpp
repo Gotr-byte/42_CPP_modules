@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:13:03 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/13 19:30:24 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:35:47 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ PhoneBook::~PhoneBook( void ){
 	return;
 }
 
-void PhoneBook::SetContact( Contact &contactData, int index )
-{
+void PhoneBook::SetContact( Contact &contactData, int index ){
 	PhoneBook::contact[index] = contactData;
 }
 
-Contact &PhoneBook::GetContact( int index )
-{
+Contact &PhoneBook::GetContact( int index ){
 	return(PhoneBook::contact[index]);
 }
