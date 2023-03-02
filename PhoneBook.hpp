@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:12:04 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/02 15:01:41 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:20:58 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 class PhoneBook {
 	private:
 		Contact contact[8];
-		int		oldest;
+		// int		oldest;
 	public:
 		PhoneBook( void );
 		~PhoneBook( void );
 		void SetContact( Contact &contactData, int index );
 		Contact &GetContact( int index );
 		void SetOldest( int inputOldest );
-		int GetOldest (void);
+		// int GetOldest (void);
 };
 #endif
