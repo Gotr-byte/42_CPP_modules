@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:07 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/02 15:55:19 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:45:16 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ void search(PhoneBook &company, int index)
 	std::cout << searchPrompt;
 	int querryIndex;
 	std::cin >> querryIndex;
+	// if (querryIndex > 7 || querryIndex  < 0)
+	// {
+	// 	std::cout << "Invalid entry" << std::endl;
+	// 	return ;
+	// }
 	std::string fullFistName = company.GetContact(querryIndex).GetName();
 	std::string fullLastName = company.GetContact(querryIndex).GetLastName();
 	std::string fullNickname = company.GetContact(querryIndex).GetNickname();
@@ -128,7 +133,7 @@ int main()
 		}
 		else if (readInput.compare(exitCmd) == SAME)
 		{
-			exit(0);
+			return(0);
 		}
 		else if (readInput.compare(searchCmd) == SAME)
 		{
@@ -141,5 +146,5 @@ int main()
 		std::cout << "enter ADD, SEARCH or EXIT" << std::endl;
 		std::cout << prompt;
 	}
-	return 0;
+	return (0);
 }
