@@ -4,7 +4,7 @@ SRCFILES := ./main.cpp \
 			./PhoneBook.cpp 
 
 CPP = c++ -std=c++98
-CPPFLAGS = -Wextra -Werror -Wall
+CPPFLAGS = -fsanitize -g -Wextra -Werror -Wall
 
 all: $(NAME)
 

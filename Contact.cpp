@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:21:51 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/13 20:35:57 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:49:15 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,34 @@ void Contact::SetLastName ( std::string inputLastName){
 			Contact::lastName = inputLastName;
 }
 
+void Contact::SetNickname ( std::string inputNickname){
+			Contact::nickname = inputNickname;
+}
+
+void Contact::SetPhoneNumber ( std::string inputPhoneNumber){
+			Contact::phoneNumber = inputPhoneNumber;
+}
+
+void Contact::SetDarkestSecret(std::string inputDarkestSecret){
+			Contact::darkestSecret = inputDarkestSecret;
+}
+
 std::string Contact::GetName(void){
 	return(Contact::firstName);
 }
 
 std::string Contact::GetLastName(void){
 	return(Contact::lastName);
+}
+
+std::string Contact::GetNickname(void){
+	return(Contact::nickname);
+}
+
+std::string Contact::GetPhoneNumber(void){
+	return(Contact::phoneNumber);
+}
+
+std::string Contact::GetDarkSecret(void){
+	return(Contact::darkestSecret);
 }

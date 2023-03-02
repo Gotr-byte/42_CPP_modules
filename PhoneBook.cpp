@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:13:03 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/02/13 20:35:47 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:02:30 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ void PhoneBook::SetContact( Contact &contactData, int index ){
 	PhoneBook::contact[index] = contactData;
 }
 
+void PhoneBook::SetOldest( int inputOldest ){
+	PhoneBook::oldest = inputOldest;
+}
+
 Contact &PhoneBook::GetContact( int index ){
 	return(PhoneBook::contact[index]);
+}
+
+int PhoneBook::GetOldest(void){
+	return(PhoneBook::oldest);
 }
