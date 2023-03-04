@@ -1,19 +1,21 @@
 NAME := phonebook
-SRCFILES := ./main.cpp \
-			./Contact.cpp \
-			./PhoneBook.cpp 
+SRCFILES := main.cpp Contact.cpp PhoneBook.cpp 
 
-CPP = c++ -std=c++98
-CPPFLAGS = -fsanitize -g -Wextra -Werror -Wall
+CPP = c++
+CFLAGS = -std=c++98 -Wextra -Werror -Wall
+OBJ = $(SRCFILES:.cpp=.o)
 
 all: $(NAME)
-OBJS := $(SRCFILES:.c=.o)
-$(NAME): $(OBJS)
-	$(CPP) $(CPPCFLAGS) $(SRCFILES) -o $(NAME) 
+
+$(NAME): $(OBJ)
+	$(CPP) $(CFLAGS) $^ -o $@ 
 
 clean:
-	rm $(NAME);
+	rm -f $(OBJ)
 
-re:		clean all
+fclean: clean
+	rm -f $(NAME)
+	
+re:		fclean all
 
 .PHONY: clean fclean re

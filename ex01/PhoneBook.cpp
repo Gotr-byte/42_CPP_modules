@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:13:03 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/04 17:52:48 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:02:59 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@
 PhoneBook::PhoneBook( void ){}
 PhoneBook::~PhoneBook( void ){}
 
-// void PhoneBook::SetContact( int index ){
-// 	this->contact[index] = contactData;
-// }
-
 Contact &PhoneBook::GetContact( int index ){
 	return(PhoneBook::contact[index]);
 }
 
 int PhoneBook::add(int index)
 {
-	// Contact inputContact;
 	std::string inputFirstName;
 	std::string inputLastName;
 	std::string inputNickname;
@@ -38,16 +33,14 @@ int PhoneBook::add(int index)
 	{
 		index = 0;
 	}
-	std::cout << "Please enter first name: ";
-	std::getline(std::cin,  inputFirstName);
-	if (!inputFirstName[0])
-		return(index);
-	this->contact[index].SetName(inputFirstName);
-	std::cout << "Please enter last name: ";
-	std::getline(std::cin,  inputLastName);
-	if (!inputLastName[0])
-		return(index);
-	this->contact[index].SetLastName(inputLastName);
+	ASK_FOR_PARAM(inputFirstName, "first name", index);
+	// this->contact[index].SetName(inputFirstName);
+	ASK_FOR_PARAM(inputLastName, "last name", index)
+	// std::cout << "Please enter last name: ";
+	// std::getline(std::cin,  inputLastName);
+	// if (!inputLastName[0])
+	// 	return(index);
+	// this->contact[index].SetLastName(inputLastName);
 	std::cout << "Please enter nickname: ";
 	std::getline(std::cin,  inputNickname);
 	if(!inputNickname[0])
@@ -63,7 +56,6 @@ int PhoneBook::add(int index)
 	if (!inputDarkestSecret[0])
 		return(index);
 	this->contact[index].SetDarkestSecret(inputDarkestSecret);
-	// this->contact[index].SetContact(inputContact, index);
 	index++;
 	return (index);
 }
@@ -124,7 +116,7 @@ void PhoneBook::search(int index)
 	std::string fullDarkSecret = this->GetContact(querryIndex).GetDarkSecret();
 	std::cout << "Recovering full data: " << std::endl;
 	std::cout << "name: " << fullFistName << std::endl;
-	std::cout << "last name: " << fullLastName << std::endl;
+	std::cout << "la$t name: " << fullLastName << std::endl;
 	std::cout << "nick: " << fullNickname << std::endl;
 	std::cout << "phone number: " << fullPhoneNumber << std::endl;
 	std::cout << "dark secret: " << fullDarkSecret << std::endl;

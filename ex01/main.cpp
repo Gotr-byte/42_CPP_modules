@@ -6,15 +6,10 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:07 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/04 17:55:25 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 18:59:31 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// c++ main.cpp Contact.cpp PhoneBook.cpp
-// use getline, change the way the programme get input TODO
-// error messages
-// search
-// ADD, SEARCH should 
 #include "./PhoneBook.hpp"
 #include "./Contact.hpp"
 
@@ -23,7 +18,7 @@
 int main()
 {
 	PhoneBook company;
-	std::string prompt = "A wonderfull prompt> ";
+	std::string prompt = "$$$> ";
 	std::string addCmd = "ADD";
 	std::string exitCmd = "EXIT";
 	std::string searchCmd = "SEARCH";
@@ -46,17 +41,11 @@ int main()
 				number++;
 		}
 		else if (readInput.compare(exitCmd) == SAME)
-		{
 			return 0;
-		}
 		else if (readInput.compare(searchCmd) == SAME)
-		{
 			company.search(number);
-		}
 		else
-		{
 			std::cout << "Invalid command" << std::endl;
-		}
 		std::cout << "enter ADD, SEARCH or EXIT" << std::endl;
 		std::cout << prompt;
 	}

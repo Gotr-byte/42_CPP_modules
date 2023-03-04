@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#ifndef CONTACT_HPP
-# define CONTACT_HPP "Contact.hpp"
-// The contact fields are: first name, last name, nickname, phone number, and
-// darkest secret. A saved contact can’t have empty fields.
+#pragma once
 
 class Contact {
 	private:
@@ -38,4 +35,3 @@ class Contact {
 		std::string GetDarkSecret(void);
 		void Search(std::string firstName);
 };
-#endif
