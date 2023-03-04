@@ -6,55 +6,70 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:07 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/02 16:45:16 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:11:49 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // c++ main.cpp Contact.cpp PhoneBook.cpp
+// use getline, change the way the programme get input TODO
+// error messages
+// search
+// ADD, SEARCH should 
 #include "./PhoneBook.hpp"
 #include "./Contact.hpp"
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 #define TRUE 1
 #define SAME 0
 
-int add(Contact &inputContact, PhoneBook &company, int index)
-{
-	std::string inputFirstName;
-	std::string inputLastName;
-	std::string inputNickname;
-	std::string inputPhoneNumber;
-	std::string inputDarkestSecret;
+// int add(PhoneBook &company, int index)
+// {
+// 	Contact inputContact;
+// 	std::string inputFirstName;
+// 	std::string inputLastName;
+// 	std::string inputNickname;
+// 	std::string inputPhoneNumber;
+// 	std::string inputDarkestSecret;
 
-	if (index > 7)
-	{
-		index = 0;
-	}
-	std::cout << "Please enter first name: ";
-	std::cin >> inputFirstName;
-	inputContact.SetName(inputFirstName);
-	std::cout << "Please enter last name: ";
-	std::cin >> inputLastName;
-	inputContact.SetLastName(inputLastName);
-	std::cout << "Please enter nickname: ";
-	std::cin >> inputNickname;
-	inputContact.SetNickname(inputNickname);
-	std::cout << "Please enter phone number: ";
-	std::cin >> inputPhoneNumber;
-	inputContact.SetPhoneNumber(inputPhoneNumber);
-	std::cout << "Please enter darkest secret: ";
-	std::cin >> inputDarkestSecret;
-	inputContact.SetDarkestSecret(inputDarkestSecret);
-	company.SetContact(inputContact, index);
-	index++;
-	return (index);
-}
+// 	if (index > 7)
+// 	{
+// 		index = 0;
+// 	}
+// 	std::cout << "Please enter first name: ";
+// 	std::getline(std::cin,  inputFirstName);
+// 	if (!inputFirstName[0])
+// 		return(index);
+// 	inputContact.SetName(inputFirstName);
+// 	std::cout << "Please enter last name: ";
+// 	std::getline(std::cin,  inputLastName);
+// 	if (!inputLastName[0])
+// 		return(index);
+// 	inputContact.SetLastName(inputLastName);
+// 	std::cout << "Please enter nickname: ";
+// 	std::getline(std::cin,  inputNickname);
+// 	if(!inputNickname[0])
+// 		return(index);
+// 	inputContact.SetNickname(inputNickname);
+// 	std::cout << "Please enter phone number: ";
+// 	std::getline(std::cin,  inputPhoneNumber);
+// 	if (!inputPhoneNumber[0])
+// 		return(index);
+// 	inputContact.SetPhoneNumber(inputPhoneNumber);
+// 	std::cout << "Please enter darkest secret: ";
+// 	std::getline(std::cin,  inputDarkestSecret);
+// 	if (!inputPhoneNumber[0])
+// 		return(index);
+// 	inputContact.SetDarkestSecret(inputDarkestSecret);
+// 	company.SetContact(inputContact, index);
+// 	index++;
+// 	return (index);
+// }
 
 void search(PhoneBook &company, int index)
 {
 	int localIndex = 0;
-	std::cout << index;
 	while (localIndex < index)
 	{
 		std::string firstNameToPrint;
@@ -86,13 +101,16 @@ void search(PhoneBook &company, int index)
 	}
 	std::string searchPrompt = "Enter entry id nb: ";
 	std::cout << searchPrompt;
-	int querryIndex;
-	std::cin >> querryIndex;
-	// if (querryIndex > 7 || querryIndex  < 0)
-	// {
-	// 	std::cout << "Invalid entry" << std::endl;
-	// 	return ;
-	// }
+	std::string inputQuerryIndex;
+	std::getline(std::cin,  inputQuerryIndex);
+	int querryIndex = (inputQuerryIndex[0] - 48);
+	if (inputQuerryIndex[1])
+		querryIndex = -1;
+	if (querryIndex > 7 || querryIndex  < 0 || !inputQuerryIndex[0])
+	{
+		std::cout << "Invalid entry" << std::endl;
+		return ;
+	}
 	std::string fullFistName = company.GetContact(querryIndex).GetName();
 	std::string fullLastName = company.GetContact(querryIndex).GetLastName();
 	std::string fullNickname = company.GetContact(querryIndex).GetNickname();
@@ -108,8 +126,6 @@ void search(PhoneBook &company, int index)
 
 int main()
 {
-
-	Contact inputContact;
 	PhoneBook company;
 	std::string prompt = "A wonderfull prompt> ";
 	std::string addCmd = "ADD";
@@ -122,18 +138,18 @@ int main()
 	index = 0;
 	number = 0;
 	std::cout << prompt;
-	while (std::cin >> readInput)
+	while (std::getline(std::cin, readInput))
 	{
 
 		if (readInput.compare(addCmd) == SAME)
 		{
-			index = add(inputContact, company, index);
+			index = company.add(company, index);
 			if (number < 8)
 				number++;
 		}
 		else if (readInput.compare(exitCmd) == SAME)
 		{
-			return(0);
+			return 1;
 		}
 		else if (readInput.compare(searchCmd) == SAME)
 		{
@@ -146,5 +162,5 @@ int main()
 		std::cout << "enter ADD, SEARCH or EXIT" << std::endl;
 		std::cout << prompt;
 	}
-	return (0);
+	return 0;
 }

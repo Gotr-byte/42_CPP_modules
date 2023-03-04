@@ -6,23 +6,23 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:21:51 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/02 15:35:44 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 10:30:11 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+
 #include "./Contact.hpp"
 
 Contact::Contact( void ){
-	std::cout << "Contact Constructor called" << std::endl;
+	// std::cout << "Contact Constructor called" << std::endl;
 	return;
 }
 
 Contact::~Contact( void ){
-	std::cout << "Contact Destructor called" << std::endl;
+	// std::cout << "Contact Destructor called" << std::endl;
 	return;
 }
-
 
 // The contact fields are: first name, last name, nickname, phone number, and
 // darkest secret. A saved contact can’t have empty fields.
