@@ -28,7 +28,6 @@ public:
     PhoneBook();
     ~PhoneBook();
 
-    // void    SetContact(Contact &contactData, int index);
     Contact &GetContact(int index);
     void    add();
     void    search();

@@ -24,7 +24,6 @@ int main()
 	std::cout << prompt;
 	while (std::getline(std::cin, readInput))
 	{
-
 		if (readInput == "ADD")
 			company.add();
 		else if (readInput == "EXIT")
