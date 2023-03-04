@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:13:03 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/04 12:04:59 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:52:48 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,20 @@
 #include "./Contact.hpp"
 #include <iostream>
 
-PhoneBook::PhoneBook( void ){
-	// std::cout << "PhoneBook Constructor called" << std::endl;
-	// return;
-}
+PhoneBook::PhoneBook( void ){}
+PhoneBook::~PhoneBook( void ){}
 
-PhoneBook::~PhoneBook( void ){
-	// std::cout << "PhoneBook Destructor called" << std::endl;
-	// return;
-}
-
-void PhoneBook::SetContact( Contact &contactData, int index ){
-	PhoneBook::contact[index] = contactData;
-}
+// void PhoneBook::SetContact( int index ){
+// 	this->contact[index] = contactData;
+// }
 
 Contact &PhoneBook::GetContact( int index ){
 	return(PhoneBook::contact[index]);
 }
 
-int PhoneBook::add(PhoneBook &company, int index)
+int PhoneBook::add(int index)
 {
-	Contact inputContact;
+	// Contact inputContact;
 	std::string inputFirstName;
 	std::string inputLastName;
 	std::string inputNickname;
@@ -49,36 +42,36 @@ int PhoneBook::add(PhoneBook &company, int index)
 	std::getline(std::cin,  inputFirstName);
 	if (!inputFirstName[0])
 		return(index);
-	inputContact.SetName(inputFirstName);
+	this->contact[index].SetName(inputFirstName);
 	std::cout << "Please enter last name: ";
 	std::getline(std::cin,  inputLastName);
 	if (!inputLastName[0])
 		return(index);
-	inputContact.SetLastName(inputLastName);
+	this->contact[index].SetLastName(inputLastName);
 	std::cout << "Please enter nickname: ";
 	std::getline(std::cin,  inputNickname);
 	if(!inputNickname[0])
 		return(index);
-	inputContact.SetNickname(inputNickname);
+	this->contact[index].SetNickname(inputNickname);
 	std::cout << "Please enter phone number: ";
 	std::getline(std::cin,  inputPhoneNumber);
 	if (!inputPhoneNumber[0])
 		return(index);
-	inputContact.SetPhoneNumber(inputPhoneNumber);
+	this->contact[index].SetPhoneNumber(inputPhoneNumber);
 	std::cout << "Please enter darkest secret: ";
 	std::getline(std::cin,  inputDarkestSecret);
 	if (!inputDarkestSecret[0])
 		return(index);
-	inputContact.SetDarkestSecret(inputDarkestSecret);
-	company.SetContact(inputContact, index);
+	this->contact[index].SetDarkestSecret(inputDarkestSecret);
+	// this->contact[index].SetContact(inputContact, index);
 	index++;
 	return (index);
 }
 
-void PhoneBook::search(PhoneBook &company, int index)
+void PhoneBook::search(int index)
 {
 	int localIndex = 0;
-	if (!company.GetContact(0).GetName()[0])
+	if (!this->GetContact(0).GetName()[0])
 	{
 		std::cout << "No contacts in database" << std::endl;
 		return ;
@@ -89,22 +82,22 @@ void PhoneBook::search(PhoneBook &company, int index)
 		std::string lastNameToPrint;
 		std::string nicknameToPrint;
 		std::string phoneNumberToPrint;
-		if (company.GetContact(localIndex).GetName().length() > 10)
-			firstNameToPrint = company.GetContact(localIndex).GetName().substr(0, 9).append(".");
+		if (this->GetContact(localIndex).GetName().length() > 10)
+			firstNameToPrint = this->GetContact(localIndex).GetName().substr(0, 9).append(".");
 		else
-			firstNameToPrint = company.GetContact(localIndex).GetName().substr(0, 10);
-		if (company.GetContact(localIndex).GetLastName().length() > 10)
-			lastNameToPrint = company.GetContact(localIndex).GetLastName().substr(0, 9).append(".");
+			firstNameToPrint = this->GetContact(localIndex).GetName().substr(0, 10);
+		if (this->GetContact(localIndex).GetLastName().length() > 10)
+			lastNameToPrint = this->GetContact(localIndex).GetLastName().substr(0, 9).append(".");
 		else
-			lastNameToPrint = company.GetContact(localIndex).GetLastName().substr(0, 10);
-		if (company.GetContact(localIndex).GetNickname().length() > 10)
-			nicknameToPrint = company.GetContact(localIndex).GetNickname().substr(0, 9).append(".");
+			lastNameToPrint = this->GetContact(localIndex).GetLastName().substr(0, 10);
+		if (this->GetContact(localIndex).GetNickname().length() > 10)
+			nicknameToPrint = this->GetContact(localIndex).GetNickname().substr(0, 9).append(".");
 		else
-			nicknameToPrint = company.GetContact(localIndex).GetLastName().substr(0, 10);
-		if (company.GetContact(localIndex).GetPhoneNumber().length() > 10)
-			phoneNumberToPrint = company.GetContact(localIndex).GetPhoneNumber().substr(0, 9).append(".");
+			nicknameToPrint = this->GetContact(localIndex).GetLastName().substr(0, 10);
+		if (this->GetContact(localIndex).GetPhoneNumber().length() > 10)
+			phoneNumberToPrint = this->GetContact(localIndex).GetPhoneNumber().substr(0, 9).append(".");
 		else
-			phoneNumberToPrint = company.GetContact(localIndex).GetPhoneNumber().substr(0, 10);
+			phoneNumberToPrint = this->GetContact(localIndex).GetPhoneNumber().substr(0, 10);
 		std::cout << std::setw(10) << localIndex << " | ";
 		std::cout << std::setw(10) << firstNameToPrint << " | ";
 		std::cout << std::setw(10) << lastNameToPrint << " | ";
@@ -124,11 +117,11 @@ void PhoneBook::search(PhoneBook &company, int index)
 		std::cout << "Invalid entry" << std::endl;
 		return ;
 	}
-	std::string fullFistName = company.GetContact(querryIndex).GetName();
-	std::string fullLastName = company.GetContact(querryIndex).GetLastName();
-	std::string fullNickname = company.GetContact(querryIndex).GetNickname();
-	std::string fullPhoneNumber = company.GetContact(querryIndex).GetPhoneNumber();
-	std::string fullDarkSecret = company.GetContact(querryIndex).GetDarkSecret();
+	std::string fullFistName = this->GetContact(querryIndex).GetName();
+	std::string fullLastName = this->GetContact(querryIndex).GetLastName();
+	std::string fullNickname = this->GetContact(querryIndex).GetNickname();
+	std::string fullPhoneNumber = this->GetContact(querryIndex).GetPhoneNumber();
+	std::string fullDarkSecret = this->GetContact(querryIndex).GetDarkSecret();
 	std::cout << "Recovering full data: " << std::endl;
 	std::cout << "name: " << fullFistName << std::endl;
 	std::cout << "last name: " << fullLastName << std::endl;

@@ -7,8 +7,8 @@ CPP = c++ -std=c++98
 CPPFLAGS = -fsanitize -g -Wextra -Werror -Wall
 
 all: $(NAME)
-
-$(NAME):
+OBJS := $(SRCFILES:.c=.o)
+$(NAME): $(OBJS)
 	$(CPP) $(CPPCFLAGS) $(SRCFILES) -o $(NAME) 
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:16:07 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/04 12:20:52 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 17:55:25 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main()
 		{
 			int indexChanged = 0;
 			indexChanged = index;
-			index = company.add(company, index);
+			index = company.add(index);
 			if (number < 8 && index != indexChanged)
 				number++;
 		}
@@ -51,7 +51,7 @@ int main()
 		}
 		else if (readInput.compare(searchCmd) == SAME)
 		{
-			company.search(company, number);
+			company.search(number);
 		}
 		else
 		{
