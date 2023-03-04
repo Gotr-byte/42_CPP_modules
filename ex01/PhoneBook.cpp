@@ -6,22 +6,21 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:13:03 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/04 19:02:59 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 20:01:04 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./PhoneBook.hpp"
-#include "./Contact.hpp"
-#include <iostream>
+#include "PhoneBook.hpp"
+#include "Contact.hpp"
 
-PhoneBook::PhoneBook( void ){}
+PhoneBook::PhoneBook( void ) : _index(), _empty(true), _oldest(){}
 PhoneBook::~PhoneBook( void ){}
 
 Contact &PhoneBook::GetContact( int index ){
 	return(PhoneBook::contact[index]);
 }
 
-int PhoneBook::add(int index)
+void PhoneBook::add()
 {
 	std::string inputFirstName;
 	std::string inputLastName;
@@ -29,46 +28,36 @@ int PhoneBook::add(int index)
 	std::string inputPhoneNumber;
 	std::string inputDarkestSecret;
 
-	if (index > 7)
+	if (_index > 7)
 	{
-		index = 0;
+		_index = _oldest;
+        _oldest++;
+        if (_oldest == 8)
+            _oldest = 0;
 	}
-	ASK_FOR_PARAM(inputFirstName, "first name", index);
-	// this->contact[index].SetName(inputFirstName);
-	ASK_FOR_PARAM(inputLastName, "last name", index)
-	// std::cout << "Please enter last name: ";
-	// std::getline(std::cin,  inputLastName);
-	// if (!inputLastName[0])
-	// 	return(index);
-	// this->contact[index].SetLastName(inputLastName);
-	std::cout << "Please enter nickname: ";
-	std::getline(std::cin,  inputNickname);
-	if(!inputNickname[0])
-		return(index);
-	this->contact[index].SetNickname(inputNickname);
-	std::cout << "Please enter phone number: ";
-	std::getline(std::cin,  inputPhoneNumber);
-	if (!inputPhoneNumber[0])
-		return(index);
-	this->contact[index].SetPhoneNumber(inputPhoneNumber);
-	std::cout << "Please enter darkest secret: ";
-	std::getline(std::cin,  inputDarkestSecret);
-	if (!inputDarkestSecret[0])
-		return(index);
-	this->contact[index].SetDarkestSecret(inputDarkestSecret);
-	index++;
-	return (index);
+	ASK_FOR_PARAM(inputFirstName, "first name", _index);
+	ASK_FOR_PARAM(inputLastName, "last name", _index);
+	ASK_FOR_PARAM(inputNickname, "nickname", _index);
+	ASK_FOR_PARAM(inputPhoneNumber, "phone number", _index);
+	ASK_FOR_PARAM(inputDarkestSecret, "darkest secret", _index);
+	this->contact[_index].SetName(inputFirstName);
+	this->contact[_index].SetLastName(inputLastName);
+	this->contact[_index].SetNickname(inputNickname);
+	this->contact[_index].SetPhoneNumber(inputPhoneNumber);
+	this->contact[_index].SetDarkestSecret(inputDarkestSecret);
+	_index++;
+	_empty = false;
 }
 
-void PhoneBook::search(int index)
+void PhoneBook::search()
 {
 	int localIndex = 0;
-	if (!this->GetContact(0).GetName()[0])
+	if (_empty == true)
 	{
-		std::cout << "No contacts in database" << std::endl;
+		std::cout << "no contacts in database" << std::endl;
 		return ;
 	}
-	while (localIndex < index)
+	while (localIndex < 8)
 	{
 		std::string firstNameToPrint;
 		std::string lastNameToPrint;
@@ -97,26 +86,26 @@ void PhoneBook::search(int index)
 		std::cout << std::setw(10) << phoneNumberToPrint.substr(0, 10) << std::endl;
 		localIndex++;
 	}
-	std::string searchPrompt = "Enter entry id nb: ";
+	std::string searchPrompt = "enter entry id nb: ";
 	std::cout << searchPrompt;
-	std::string inputQuerryIndex;
-	std::getline(std::cin,  inputQuerryIndex);
-	int querryIndex = (inputQuerryIndex[0] - 48);
-	if (inputQuerryIndex[1])
-		querryIndex = -1;
-	if (querryIndex > 7 || querryIndex  < 0 || !inputQuerryIndex[0])
+	std::string inputQueryIndex;
+	std::getline(std::cin,  inputQueryIndex);
+	int queryIndex = (inputQueryIndex[0] - 48);
+	if (inputQueryIndex[1])
+		queryIndex = -1;
+	if (queryIndex > 7 || queryIndex  < 0 || !inputQueryIndex[0])
 	{
-		std::cout << "Invalid entry" << std::endl;
+		std::cout << "invalid entry" << std::endl;
 		return ;
 	}
-	std::string fullFistName = this->GetContact(querryIndex).GetName();
-	std::string fullLastName = this->GetContact(querryIndex).GetLastName();
-	std::string fullNickname = this->GetContact(querryIndex).GetNickname();
-	std::string fullPhoneNumber = this->GetContact(querryIndex).GetPhoneNumber();
-	std::string fullDarkSecret = this->GetContact(querryIndex).GetDarkSecret();
-	std::cout << "Recovering full data: " << std::endl;
+	std::string fullFistName = this->GetContact(queryIndex).GetName();
+	std::string fullLastName = this->GetContact(queryIndex).GetLastName();
+	std::string fullNickname = this->GetContact(queryIndex).GetNickname();
+	std::string fullPhoneNumber = this->GetContact(queryIndex).GetPhoneNumber();
+	std::string fullDarkSecret = this->GetContact(queryIndex).GetDarkSecret();
+	std::cout << "recovering full data: " << std::endl;
 	std::cout << "name: " << fullFistName << std::endl;
-	std::cout << "la$t name: " << fullLastName << std::endl;
+	std::cout << "last name: " << fullLastName << std::endl;
 	std::cout << "nick: " << fullNickname << std::endl;
 	std::cout << "phone number: " << fullPhoneNumber << std::endl;
 	std::cout << "dark secret: " << fullDarkSecret << std::endl;

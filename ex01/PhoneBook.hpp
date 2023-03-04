@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:12:04 by pbiederm          #+#    #+#             */
-/*   Updated: 2023/03/04 19:01:06 by pbiederm         ###   ########.fr       */
+/*   Updated: 2023/03/04 19:26:22 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 std::cout << "Please enter " << name << ": ";\
 std::getline(std::cin,  param); \
 if (!param[0]) \
-    return(index); \
-this->contact[index].SetName(param);
+    return;
 
 
 class PhoneBook {
@@ -31,9 +30,12 @@ public:
 
     // void    SetContact(Contact &contactData, int index);
     Contact &GetContact(int index);
-    int     add(int index);
-    void    search(int index);
+    void    add();
+    void    search();
 private:
     Contact contact[8];
+    int     _index;
+    bool    _empty;
+    int     _oldest;
 };
 
