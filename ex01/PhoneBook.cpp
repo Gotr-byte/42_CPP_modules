@@ -93,7 +93,8 @@ void PhoneBook::search()
 	int queryIndex = (inputQueryIndex[0] - 48);
 	if (inputQueryIndex[1])
 		queryIndex = -1;
-	if (queryIndex > 7 || queryIndex  < 0 || !inputQueryIndex[0])
+	if (queryIndex > 7 || queryIndex  < 0 || !inputQueryIndex[0] ||
+    !(this->GetContact(queryIndex).GetName()[0]))
 	{
 		std::cout << "invalid entry" << std::endl;
 		return ;
